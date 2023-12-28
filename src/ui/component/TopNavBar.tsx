@@ -1,4 +1,4 @@
-import {Badge, Button, Container, Form, Navbar} from "react-bootstrap";
+import {Badge, Container, Form, Navbar} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {faCartShopping, faHouse, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -29,7 +29,7 @@ export default function TopNavBar() {
     }
 
     useEffect(() => {
-        if (loginUser){
+        if (loginUser) {
             getCartItemListLength();
         }
     }, [loginUser])
@@ -46,10 +46,9 @@ export default function TopNavBar() {
                         <Link to="/" className="ms-3"><FontAwesomeIcon icon={faHouse}
                                                                        style={{color: "#f5f5f5",}}/>
                         </Link>
-
-                        <FontAwesomeIcon icon={faCartShopping} style={{color: "#ffffff",}} onClick={handleShow}
-                                         className="ms-3"/>
-                        <Badge bg="dark" className="ms-1">{cartItemLength}</Badge>
+                            <FontAwesomeIcon icon={faCartShopping} style={{color: "#ffffff",}} onClick={handleShow}
+                                             className="ms-3"/>
+                            <Badge bg="dark" className="ms-1">{cartItemLength}</Badge>
                     </div>
 
                 </>
@@ -79,14 +78,13 @@ export default function TopNavBar() {
                     style={{height: "70px"}}>
 
                 <Container className="d-flex">
-                    <Form className="d-flex justify-content-end">
+                    <Form className="d-flex justify-content-start">
                         <Form.Control
                             type="search"
                             placeholder="Search"
                             className="me-2"
                             aria-label="Search"
                         />
-                        <Button variant="outline-danger">Search</Button>
                     </Form>
                     <div className="me-5 ">
                         {renderLoginContainer()}

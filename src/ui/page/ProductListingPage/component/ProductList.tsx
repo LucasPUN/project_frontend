@@ -23,7 +23,9 @@ export default function ProductList({product}:Props){
                     </div>
 
                     <Card.Body>
+
                         <Card.Title style={{height:"40px"}}>{product.name}</Card.Title>
+
                         <Card.Text style={{height:"10px"}}>
                             ${product.price}
                         </Card.Text>

@@ -35,7 +35,7 @@ export default function ProductListingPage(){
             <Container>
                 {
                     productList?
-                        <Row xs={2} md={4} className="g-4">
+                        <Row xs={2} md={4} className="g-1">
                         {
                             productList.map((item) => (
                                 <ProductList product={item}/>
@@ -43,7 +43,7 @@ export default function ProductListingPage(){
                         }
                         </Row> :
 
-                        <Row xs={2} md={4} className="g-4">
+                        <Row xs={2} md={4} className="g-1">
                         {
                             Array.from({ length: 8 }).map(() => (
                                 <LoadingPage/>

@@ -10,7 +10,8 @@ import ErrorPage from "../ui/page/ErrorPage.tsx";
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <ProductListingPage/>
+        element: <ProductListingPage/>,
+        errorElement: <ErrorPage/>
     },
     {
         path: "/product/:productId",
