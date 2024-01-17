@@ -21,7 +21,7 @@ export default function ProductDetailPage() {
 
     const [quantity, setQuantity] = useState<number>(1);
     const [productDetail, setProductDetail] = useState<ProductDetailDto | undefined>(undefined);
-    const [isAdddingCart, setIsAddingCart] = useState<boolean>(false);
+    const [isAddingCart, setIsAddingCart] = useState<boolean>(false);
     const [showToast, setShowToast] = useState<boolean>(false);
 
     const loginUser = useContext(LoginUserContext)
@@ -61,7 +61,7 @@ export default function ProductDetailPage() {
     }
 
     const renderAddToCartButton = () => {
-        if (isAdddingCart) {
+        if (isAddingCart) {
             return (
                 <>
                     <div>
