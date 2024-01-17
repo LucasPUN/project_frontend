@@ -100,7 +100,7 @@ export default function ProductDetailPage() {
                             <h5 className="d-flex justify-content-center mt-2">Stock: {productDetail.stock}</h5>
                         </div>
                         <div>
-                            {renderAddToCartButton()};
+                            {renderAddToCartButton()}
                         </div>
                     </div>
                 </>
