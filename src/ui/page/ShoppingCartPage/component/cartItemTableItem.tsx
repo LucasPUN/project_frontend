@@ -2,9 +2,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSpinner, faTrash} from "@fortawesome/free-solid-svg-icons";
 import QuantitySelector from "../../../component/QuantitySelector.tsx";
 import {CartItemDto} from "../../../../data/CartItemDto.ts";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import * as CartItemApi from "../../../../api/CartItemApi.ts";
 import QuantitySelectorLoading from "../../../component/QuantitySelectorLoading.tsx";
+import {CartItemLengthContext} from "../../../../App.tsx";
 
 type Props = {
     item: CartItemDto,
@@ -17,6 +18,7 @@ export default function CartItemTableItem({item, cartItemList, setCartItemList, 
     const [quantity, setQuantity] = useState<number>(item.cart_quantity);
     const [isPatchingQuantity, setIsPatchingQuantity] = useState<boolean>(false);
     const [isDeleting, setDeleting] = useState<boolean>(false);
+    const { cartItemLength, updateMyValue } = useContext(CartItemLengthContext);
 
 
 
@@ -59,6 +61,8 @@ export default function CartItemTableItem({item, cartItemList, setCartItemList, 
         setCartItemList(updatedList);
         calTotalPrice(updatedList)
         setDeleting(false);
+        const data = await CartItemApi.getCartItemList();
+        updateMyValue(data.length);
     }
 
 

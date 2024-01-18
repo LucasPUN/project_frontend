@@ -7,7 +7,7 @@ import {ProductDetailDto} from "../../../data/ProductListDto.ts";
 import Loading from "../../component/Loading.tsx";
 import * as ProductApi from "../../../api/ProductListApi.ts"
 import * as CartItemApi from "../../../api/CartItemApi.ts";
-import {LoginUserContext} from "../../../App.tsx";
+import {CartItemLengthContext, LoginUserContext} from "../../../App.tsx";
 import AddedToCartToast from "./compeonent/AddedToCartToast.tsx";
 
 
@@ -25,6 +25,7 @@ export default function ProductDetailPage() {
     const [showToast, setShowToast] = useState<boolean>(false);
 
     const loginUser = useContext(LoginUserContext)
+    const { cartItemLength, updateMyValue } = useContext(CartItemLengthContext);
 
 
     const handleMinus = () => {
@@ -55,6 +56,8 @@ export default function ProductDetailPage() {
             await CartItemApi.putCartItem(productDetail!.product_id, quantity);
             setIsAddingCart(false);
             setShowToast(true);
+            const data = await CartItemApi.getCartItemList();
+            updateMyValue(data.length);
         } else if (loginUser === null) {
             navigate("/login")
         }

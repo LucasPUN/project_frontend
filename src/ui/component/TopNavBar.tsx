@@ -3,7 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {faCartShopping, faHouse, faUser} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useContext, useEffect, useState} from "react";
-import {LoginUserContext} from "../../App.tsx";
+import {CartItemLengthContext, LoginUserContext} from "../../App.tsx";
 import * as FirebaseAuthService from "../../authService/FirebaseAuthService.ts"
 import ShoppingCartOffcanvas from "./ShoppingCartOffcanvas.tsx";
 import * as CartItemApi from "../../api/CartItemApi.ts";
@@ -11,9 +11,10 @@ import * as CartItemApi from "../../api/CartItemApi.ts";
 
 export default function TopNavBar() {
     const loginUser = useContext(LoginUserContext);
+    const { cartItemLength, updateMyValue } = useContext(CartItemLengthContext);
 
     const [show, setShow] = useState<boolean>(false);
-    const [cartItemLength, setCartItemLength] = useState<number>(0);
+
 
     const navigate = useNavigate();
     const handleClose = () => setShow(false);
@@ -22,7 +23,7 @@ export default function TopNavBar() {
     const getCartItemListLength = async () => {
         try {
             const data = await CartItemApi.getCartItemList();
-            setCartItemLength(data.length);
+            updateMyValue(data.length);
         } catch (error) {
             navigate("/error")
         }
