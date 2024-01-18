@@ -18,6 +18,7 @@ export default function CheckOutPage() {
     const loginUser = useContext(LoginUserContext);
 
     const [transactionData, setTransactionData] = useState<TransactionDto | undefined>(undefined);
+    const [isCheckout,setIsCheckout] = useState<boolean>(false);
 
     const getTransactionData = async () => {
         try {
@@ -45,6 +46,7 @@ export default function CheckOutPage() {
     const handleCheckout = async () => {
         try {
             if(params.transactionId) {
+                setIsCheckout(true);
                 await TransactionApi.payTransactionById(params.transactionId);
                 await TransactionApi.finishTransactionById(params.transactionId);
                 navigate("/thankyou")
@@ -66,7 +68,12 @@ export default function CheckOutPage() {
                                 <h3>Total : {transactionData.total}</h3>
                             </div>
                             <div className="d-flex justify-content-end">
-                            <Button variant="success" style={{width: "130px"}} onClick={handleCheckout}>Pay</Button>
+                                {
+                                    isCheckout?
+                                        <Button variant="success" style={{width: "130px"}} disabled>PAY</Button>:
+                                        <Button variant="success" style={{width: "130px"}} onClick={handleCheckout}>Pay</Button>
+
+                                }
                             </div>
                         </>
                     ) :
