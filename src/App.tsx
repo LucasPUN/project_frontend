@@ -7,8 +7,12 @@ import {router} from "./config/ReactRrouterConfig.tsx"
 
 
 export const LoginUserContext = createContext<UserData | null | undefined>(undefined)
-export const CartItemLengthContext = createContext();
+export const CartItemLengthContext = createContext<UpdateMyValue | undefined>(undefined);
 
+type UpdateMyValue = {
+    cartItemLength: number;
+    updateMyValue: (newValue: number) => void;
+};
 
 function App() {
     const [loginUser, setLoginUser] = useState<UserData | null | undefined>(undefined);
@@ -18,13 +22,18 @@ function App() {
         setCartItemLength(newValue);
     };
 
+    const cartItemContextValue: UpdateMyValue = {
+        cartItemLength,
+        updateMyValue,
+    };
+
     useEffect(() => {
         FirebaseAuthService.handleOnAuthStateChanged(setLoginUser);
     }, []);
 
     return (
         <>
-            <CartItemLengthContext.Provider  value={{cartItemLength,updateMyValue:updateMyValue}}>
+            <CartItemLengthContext.Provider  value={cartItemContextValue}>
                 <LoginUserContext.Provider value={loginUser}>
                     <RouterProvider router={router}/>
                 </LoginUserContext.Provider>

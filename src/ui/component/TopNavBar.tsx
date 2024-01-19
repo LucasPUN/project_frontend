@@ -11,7 +11,7 @@ import * as CartItemApi from "../../api/CartItemApi.ts";
 
 export default function TopNavBar() {
     const loginUser = useContext(LoginUserContext);
-    const { cartItemLength, updateMyValue } = useContext(CartItemLengthContext);
+    const cartItemContextValue = useContext(CartItemLengthContext);
 
     const [show, setShow] = useState<boolean>(false);
 
@@ -23,7 +23,7 @@ export default function TopNavBar() {
     const getCartItemListLength = async () => {
         try {
             const data = await CartItemApi.getCartItemList();
-            updateMyValue(data.length);
+            cartItemContextValue?.updateMyValue(data.length);
         } catch (error) {
             navigate("/error")
         }
@@ -49,7 +49,7 @@ export default function TopNavBar() {
                         </Link>
                             <FontAwesomeIcon icon={faCartShopping} style={{color: "#ffffff",}} onClick={handleShow}
                                              className="ms-3"/>
-                            <Badge bg="dark" className="ms-1">{cartItemLength}</Badge>
+                            <Badge bg="dark" className="ms-1">{cartItemContextValue?.cartItemLength}</Badge>
                     </div>
 
                 </>

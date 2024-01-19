@@ -18,7 +18,7 @@ export default function CartItemTableItem({item, cartItemList, setCartItemList, 
     const [quantity, setQuantity] = useState<number>(item.cart_quantity);
     const [isPatchingQuantity, setIsPatchingQuantity] = useState<boolean>(false);
     const [isDeleting, setDeleting] = useState<boolean>(false);
-    const { cartItemLength, updateMyValue } = useContext(CartItemLengthContext);
+    const cartItemContextValue = useContext(CartItemLengthContext);
 
 
 
@@ -62,7 +62,7 @@ export default function CartItemTableItem({item, cartItemList, setCartItemList, 
         calTotalPrice(updatedList)
         setDeleting(false);
         const data = await CartItemApi.getCartItemList();
-        updateMyValue(data.length);
+        cartItemContextValue?.updateMyValue(data.length);
     }
 
 

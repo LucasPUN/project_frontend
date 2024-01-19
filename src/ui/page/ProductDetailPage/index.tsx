@@ -25,7 +25,7 @@ export default function ProductDetailPage() {
     const [showToast, setShowToast] = useState<boolean>(false);
 
     const loginUser = useContext(LoginUserContext)
-    const { cartItemLength, updateMyValue } = useContext(CartItemLengthContext);
+    const cartItemContextValue = useContext(CartItemLengthContext);
 
 
     const handleMinus = () => {
@@ -57,7 +57,7 @@ export default function ProductDetailPage() {
             setIsAddingCart(false);
             setShowToast(true);
             const data = await CartItemApi.getCartItemList();
-            updateMyValue(data.length);
+            cartItemContextValue?.updateMyValue(data.length);
         } else if (loginUser === null) {
             navigate("/login")
         }
